@@ -9,7 +9,7 @@ Given a treeClust object, or the necessary components, compute all
  pairwise dissimilarities for input to a clustering algorithm
 }
 \usage{
-tcdist(obj, d.num = 1, tbl, mat, trees)
+tcdist(obj, d.num = 1, tbl, mat, trees, verbose=0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,9 @@ Matrix of leaf-membership factors, if not supplied in "obj".
 }
   \item{trees}{
 List of trees, if not supplied in obj.
+}
+  \item{verbose}{
+If > 0, print some information useful for debugging.
 }
 }
 \details{

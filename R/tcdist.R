@@ -1,11 +1,11 @@
-tcdist <- function (obj, d.num = 1, tbl, mat, trees) 
+tcdist <- function (obj, d.num = 1, tbl, mat, trees, verbose = 0)
 {
 #
 # Extract distances from an existing treeClust object. If there's
 # a dist element in there, computed with the proper d.num, return it.
 #
-if (!missing (obj) && any(names (obj) == "dist") && obj$d.num == d.num)
-    return (obj$dist)
+if (!missing (obj) && any(names (obj) == "dists") && obj$d.num == d.num)
+    return (obj$dists)
 if (!missing (obj) && any (names (obj) == "tbl"))
     tbl <- obj$tbl
 else
@@ -38,7 +38,10 @@ n <- length (trees[[1]]$where)
 dists <- numeric (n * (n - 1) / 2)
 if (d.num == 3) tree.wts <- rep (1, length(trees))
 if (d.num == 4) tree.wts <- tbl[,"DevRat"] / max (tbl[,"DevRat"])
+
 for (i in 1:length (trees)) {
+    if (verbose > 0)
+        cat ("Tree ", i, ", has wt ", tree.wts[i], "\n")
     dists <- dists + tree.wts[i] * d3.dist (trees[[i]])
 }
 class (dists) <- "dist"

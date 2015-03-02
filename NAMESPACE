@@ -1,6 +1,8 @@
 export ("treeClust", "treeClust.control", "d3.dist", "tcdist", "leaf.numbers",
-        "make.leaf.paths", "rp.deviance", "cramer",
+        "make.leaf.paths", "rp.deviance", "cramer", "tcnewdata",
     "rpart.predict.leaves", "make.leaf.paths")
-S3method ("print", "treeClust")
+S3method ("plot",    "treeClust")
+S3method ("print",   "treeClust")
+S3method ("summary", "treeClust")
 import ("rpart")
 import ("cluster")

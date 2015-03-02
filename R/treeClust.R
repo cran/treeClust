@@ -101,9 +101,10 @@ for(i in col.range) {
 # will need to generate the full set, first.
 #
     if (response.had.NAs) {
-        leaf.matrix[,i] <- factor (rpart.predict.leaves (mytree, dfx, 
-                                                    type = "where"))
-        mytree$where <- leaf.matrix[,i] # "where" without missings
+        mytree$where.orig <- mytree$where # for debugging
+        mytree$where <- rpart.predict.leaves (mytree, dfx, type = "where")
+# "where" without missings
+        leaf.matrix[,i] <- factor (mytree$where)
     }
     else 
         leaf.matrix[, i] <- factor (mytree$where)
@@ -131,7 +132,8 @@ for(i in col.range) {
     if (d.num <= 2)
         next
 #
-# For d.num = 3 or 4, compute and accumulate distances.
+# For d.num = 3, compute and accumulate distances. For 4, we have to 
+# wait until all the trees are assembled.
 #
     if (d.num == 3)
         dists <- dists + d3.dist (mytree)
@@ -161,21 +163,28 @@ if (control$return.dists == TRUE ||
 #
     if (d.num == 1 || d.num == 2)
         dists <- tcdist (tbl = results, mat = leaf.matrix)
-    else
-        dists <- tcdist (tbl = results, mat = leaf.matrix, trees = big.list.of.trees)
+    else if (d.num == 4) {
+            dists <- tcdist (tbl = results, mat = leaf.matrix, 
+                                 trees = big.list.of.trees, d.num = d.num)
+    }
 }
 if (missing (final.algorithm)) {
     final.algorithm <- "None"
     final.clust <- NULL
 } else {
-
+#
+# We call "agnes" or "pam" by "do.call", which saves a copy of the dists
+# in the call element. That thing is huge and unnecessary, so we remove it.
+#
     if (final.algorithm == "agnes") {
         final.clust <- do.call (final.algorithm, list (x = dists, ...))
+        final.clust$call$x <- "deleted"
         if (control$cluster.only == TRUE)
             final.clust <- cutree (final.clust, k = k)
     }
     if (final.algorithm == "pam") {
-        final.clust <- do.call (final.algorithm, list (x = dists, k = k, ...))    
+        final.clust <- do.call (final.algorithm, list (x = dists, k = k, ...))  
+        final.clust$call$x <- "deleted"
         if (control$cluster.only == TRUE)
             final.clust <- final.clust$clustering
     }
@@ -185,17 +194,9 @@ if (missing (final.algorithm)) {
 # tree with p leaves -- we could make do with one less.
 #
     if (is.element (final.algorithm, c("clara", "kmeans"))) {
-        leaf.counts <- sapply (leaf.matrix, function (x) length (unique (x)))
-        start <- c(1, 1 + cumsum (leaf.counts[-length (leaf.counts)]))
-        end <- cumsum (leaf.counts)
-        newdata <- matrix (0, nrow (dfx), sum (leaf.counts))
-        for (i in 1:length (leaf.counts)) {
-            mod <- model.matrix (~ factor (leaf.matrix[,i]) -1)
-            if (d.num == 2)
-                newdata[,start[i]:end[i]] <- mod * results[i,"DevRat"] / max (results[,"DevRat"])
-            else
-                newdata[,start[i]:end[i]] <- mod
-        }
+        newdata <- tcnewdata (tbl = results, mat = leaf.matrix, 
+                                 trees = big.list.of.trees, d.num = d.num)
+
         if (final.algorithm == "kmeans")
             final.clust <- kmeans (x = newdata, centers = k)
         else 
@@ -228,5 +229,4 @@ class(return.val) <- "treeClust"
 
 return(return.val)
 }
-
 

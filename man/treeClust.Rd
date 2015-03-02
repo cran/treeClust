@@ -22,7 +22,8 @@ Input data frame. Columns may be numeric or categorical. Missing values
 }
   \item{d.num}{
 Integer: Dissimilarity specifier. When d.num = 1, the dissimilarity between 
- two observations is the number of trees where they disagree. With d.num = 2,
+ two observations is the proportion of trees where they disagree. 
+ With d.num = 2,
  those counts are weighted according to tree quality. In d.num = 3, 
  dissimilarities are variable with trees, reflecting the belief that some pairs
  of leaves are closer together than others. With d.num = 4, those 

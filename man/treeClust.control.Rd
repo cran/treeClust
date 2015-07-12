@@ -9,8 +9,9 @@ This function produces a list that is used as input to \code{\link{treeClust}}
 to determine which items are preserved in the output.
 }
 \usage{
-treeClust.control(return.trees = FALSE, return.mat = TRUE, return.dists = FALSE, 
- return.newdata = FALSE, cluster.only = FALSE, serule = 0, ...)
+treeClust.control(return.trees = FALSE, return.mat = TRUE, 
+ return.dists = FALSE, return.newdata = FALSE, cluster.only = FALSE, 
+ serule = 0, DevRatThreshold = 1, parallelnodes = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -37,6 +38,19 @@ distance (see "Details"). Default FALSE.
 Describes how to prune the rpart trees. By default, each tree is pruned to the
 minimum error size. With serule > 0, each tree is pruned to the smallest size 
 for which the cross-validated error is less than (min error) + (serule * sds).
+}
+  \item{DevRatThreshold}{
+Trees whose deviance ratio is greater than this number are presumed to have
+arisen from redundant variables. The predictor at the tree's root is dropped,
+a new tree built, and the new deviance ratio computed.
+this process is repeated until the resulting tree has deviance ratio less
+than or equal to the threshold. Default: 1 (do not drop any such trees).
+}
+  \item{parallelnodes}{
+Describes whether to use parallel processing by creating a "computing cluster"
+containing "parallelnodes" nodes. If that number is = 1 no cluster is created. 
+Here "cluster" is referring to a set of nodes operating in parallel, 
+not to the clustering of the data.
 }
   \item{\dots}{
 Other arguments, passed onto the output.

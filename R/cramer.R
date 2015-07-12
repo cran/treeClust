@@ -12,6 +12,6 @@ options(warn = -1) # no warnings at all!
 #
 chisq <- chisq.test (tbl)$statistic
 n <- sum (tbl)
-return (sqrt (chisq / (n * (k - 1))))
+return (unname (sqrt (chisq / (n * (k - 1)))))
 }
 

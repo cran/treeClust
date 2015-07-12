@@ -10,15 +10,19 @@ index on the horizontal. Each point is shown by a digit (or digits) giving
 the size of the tree.
 }
 \usage{
-\method{plot}{treeClust} (x, \ldots)
+\method{plot}{treeClust} (x, extended, \ldots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 Object of class treeClust
 }
+  \item{extended}{
+Logical. If TRUE, include all variables, even those whose trees were dropped.
+Otherwise only include variables whose trees were kept. Default TRUE.
+}
   \item{\dots}{
-Other stuff.
+Other arguments to be passed to the plot function.
 }
 }
 \value{

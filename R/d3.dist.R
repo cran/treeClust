@@ -109,8 +109,14 @@ rn <- length(where)
 grid <- matrix (0, nrow = rn * (rn - 1)/2, ncol=2)
 grid[,1] <- rep (1:(rn - 1), (rn - 1):1)
 grid[,2] <- unlist (sapply (2:rn, function (x) seq (x, rn)))
-return (pairwise.distances[cbind (rowholder[grid[,1]], rowholder[grid[,2]])])
-
+dists <- pairwise.distances[cbind(rowholder[grid[, 1]], rowholder[grid[, 
+        2]])]
+class(dists) <- "dist"
+attr(dists, "Size") <- length (mytree$where)
+attr(dists, "Diag") <- FALSE
+attr(dists, "Upper") <- FALSE
+attr(dists, "method") <- "manhattan"
+return(dists)
 }
 
 

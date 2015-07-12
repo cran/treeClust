@@ -12,7 +12,7 @@ This function uses a set of classification or regression trees to build
 }
 \usage{
 treeClust(dfx, d.num = 1, col.range = 1:ncol(dfx), verbose = F, 
-  final.algorithm, k, control = treeClust.control(), ...)
+  final.algorithm, k, control = treeClust.control(), rcontrol = rpart.control(), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -46,6 +46,10 @@ If final.algorithm is supplied, the number of clusters is required.
 List of the sort produced by \code{\link{treeClust.control}}, giving
  specifications for the fitting routine.
 }
+  \item{rcontrol}{
+List of the sort produced by \code{\link{rpart.control}}, giving
+ arguments for the rpart routine.
+}
   \item{\dots}{
 Other arguments, to be passed to the final clustering algorithm if specified.
 }
@@ -63,6 +67,9 @@ If control$cluster.only is TRUE, a vector of cluster assignments, as produced
 \item{d.num }{d.num, as supplied}
 \item{tbl }{Two-column matrix with one row for each tree retained, giving
   size and deviance ratio}
+\item{extended.tbl }{Two-column matrix like tbl, but with one row for every
+  variable, giving size and deviance ratio (these will be 1 and 0 for variables
+  whose trees were discarded}
 \item{final.algorithm }{final.algorithm, as supplied}
 \item{final.clust }{If final.algorithm is supplied, the output from the final 
  clustering algorithm; otherwise, NULL}
@@ -87,11 +94,6 @@ Sam Buttrey, buttrey@nps.edu
 \code{\link{treeClust.control}}
 }
 \examples{
-#
-# Use d.num = 2 clustering on the iris data, without Species. Use
-# kmeans to form 6 clusters. The "final.clust" element is the output
-# from kmeans.
-#
 iris.km6 <- treeClust (iris[,-5], d.num = 2, final.algorithm = "kmeans", k=6)
 table (iris.km6$final.clust$cluster, iris$Species)
 }

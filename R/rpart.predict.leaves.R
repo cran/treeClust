@@ -6,9 +6,9 @@ rpart.predict.leaves <- function (rp, newdata, type = "where")
 # search-for-corresponding-node-in-a-regression-tree-using-rpart
 #
 if (type == "where")
-    rp$frame$yval = 1:nrow(rp$frame)
+    rp$frame$yval <- 1:nrow(rp$frame)
 else if (type == "leaf")
-    rp$frame$yval = rownames(rp$frame)
+    rp$frame$yval <- rownames(rp$frame)
     else
     stop ("Type must be 'where' or 'leaf'")
 return (predict(rp, newdata=newdata, type = "vector"))

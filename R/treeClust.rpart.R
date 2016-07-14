@@ -47,7 +47,16 @@ treeClust.rpart <- function (i, dfx, d.num, control, rcontrol)
         min.cp.dex <- which (cptbl[,"xerror"] == min(cptbl[,"xerror"]))[1]
         serule.value <-         cptbl[min.cp.dex,"xerror"] + 
                control$serule * cptbl[min.cp.dex,"xstd"]
-        best.row <- min(which (cptbl[,"xerror"] <= serule.value))
+#
+# This is intended to defeat what we think to be an rpart bug when the
+# best tree has exactly one split. If there is a tie for best xstd, choose
+# the second row with that value.
+#
+        good.rows <- which (cptbl[,"xerror"] <= serule.value)
+        if (length (good.rows) > 1)
+            best.row <- good.rows[2]
+        else
+            best.row <- good.rows
         if(best.row == 1.)
             return (outlist)
 #

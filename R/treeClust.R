@@ -38,11 +38,15 @@ results <- matrix(0., nrow = ncol(dfx), ncol = 2.)
 dimnames(results) <- list(dimnames(dfx)[[2.]], c("DevRat", "Size"))
 #
 # Set up the big list of trees if asked -- except that we will need
-# that list no matter what, when d.num == 4 or we're asked for "newdata."
-# Save that onto "control" for later use.
+# that list no matter what, when d.num == 4 or we're asked for "newdata,"
+# which includes the cases where we plan to cluster with "clara" or "kmeans."
+# We also need it for return.dists = TRUE and d.num = 3. Save the fact of
+# us keeping the list of trees to "control" for later use.
 #
 control$keep.trees <- FALSE
-if (control$return.trees || control$return.newdata || d.num == 4) {
+if (control$return.trees || control$return.newdata || d.num == 4 ||
+    (!missing (final.algorithm) && is.element (final.algorithm, c("clara", "pam", "kmeans"))) || 
+    (control$return.dists && d.num == 3)) {
     control$keep.trees <- TRUE
     big.list.of.trees <- vector("list", ncol(dfx))
 }
@@ -68,7 +72,7 @@ if (parproc) {
                                 rcontrol = rcontrol)
     keepers <- sapply (caout, function (x) x$Size > 1)
     leaf.matrix <- as.data.frame (sapply (caout[keepers], function (x) x$leaf.where))
-    names (leaf.matrix) <- names (dfx)[keepers]
+    names (leaf.matrix) <- names (dfx)[col.range][keepers]
     results <- as.data.frame (t(sapply (caout, function (x) unlist (x[1:2]))))
     if (control$keep.trees)
         big.list.of.trees <- lapply (caout[keepers], function (x) x$tree)
@@ -86,7 +90,7 @@ if (parproc) {
     }
     if (control$keep.trees)
         big.list.of.trees <- big.list.of.trees[results[,"Size"] > 1]
-    leaf.matrix <- leaf.matrix[,results[,"Size"] > 1]
+    leaf.matrix <- leaf.matrix[,results[,"Size"] > 1, drop = F]
 }
 
 if(!any(results[, "Size"] > 1))
@@ -183,4 +187,3 @@ class(return.val) <- "treeClust"
 
 return(return.val)
 }
-

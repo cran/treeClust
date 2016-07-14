@@ -31,16 +31,16 @@ List of trees, if not present in \code{obj} (needed for d.num = 3 or 4),
 }
 }
 \details{
-See the paper by Buttrey and Whitaker. These points have attributes that
-match the treeClust distances, but the inter-point distances are not
-identical. This is experimental.
+See the paper by Buttrey and Whitaker. The inter-point distances of this
+data set "mirror" the treeClust distances, but only if they are computed in
+a particular non-standard way. This is experimental.
 }
 \value{
 Numeric matrix of data whose inter-point distances match the d1 distances
 computed by treeClust, and which may be useful for d2-d4 as well.
 }
 \references{
-Buttrey and Whitaker, in submission.
+Buttrey and Whitaker, The R Journal, 7/2, 2015.
 }
 \author{
 Sam Buttrey, buttrey@nps.edu

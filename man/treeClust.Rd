@@ -84,8 +84,8 @@ If control$cluster.only is TRUE, a vector of cluster assignments, as produced
  
 }
 \references{
-Buttrey and Whitaker, "A Scale-Independent, Noise- and Outlier-Resistant
- Dissimilarity for Tree-Based Clustering of Mixed Data"
+Buttrey and Whitaker, "treeClust: An R Package for Tree-Based Clustering
+Dissimilarities," The R Journal, 7/2, 2015.
 }
 \author{
 Sam Buttrey, buttrey@nps.edu

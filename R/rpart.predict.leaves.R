@@ -5,12 +5,14 @@ rpart.predict.leaves <- function (rp, newdata, type = "where")
 # http://stackoverflow.com/questions/5102754/
 # search-for-corresponding-node-in-a-regression-tree-using-rpart
 #
-if (type == "where")
+if (type == "where") {
     rp$frame$yval <- 1:nrow(rp$frame)
-else if (type == "leaf")
+    should.be.leaves <- which(rp$frame[, 1] == "<leaf>")
+} else if (type == "leaf") {
     rp$frame$yval <- rownames(rp$frame)
-    else
-        stop ("Type must be 'where' or 'leaf'")
+    should.be.leaves <- rownames(rp$frame)[rp$frame[, 1] == "<leaf>"]
+}
+else stop ("Type must be 'where' or 'leaf'")
 #
 # Sometimes -- I don't know why -- the rpart.predict() function will
 # give back a "leaf membership" that's not a leaf. See if that's true.

@@ -1,4 +1,4 @@
-55e21d6ab851d937a9867d830c7c170f *DESCRIPTION
+846f13da60c1541cd96677d1d7d22ce0 *DESCRIPTION
 8d8ae6c06196746d9c64638e7976e8a1 *NAMESPACE
 4b1011dfe01ddd167c1dace7402748f8 *R/cramer.R
 1ce526dfac864d6326bb1edaf37de17d *R/d3.dist.R
@@ -7,7 +7,7 @@ be5399e37ccd7e0741578c97a32e03ec *R/leaf.numbers.R
 eecd1545824d590c21642fbdbb52e447 *R/plot.treeClust.R
 f09a9357dd32e67e2cb60acc1e3e4b6f *R/print.treeClust.R
 1ef0487e94a7add73f14ebc2b32f7e6d *R/rp.deviance.R
-b80418d66b112ec85e383cdbf730e002 *R/rpart.predict.leaves.R
+7cc377b316686034d4121d4c19621695 *R/rpart.predict.leaves.R
 fe1976539ebd2ad1956c721a33a9621c *R/summary.treeClust.R
 cdb4ba93539cef6e37c3d264ecdf0822 *R/tcdist.R
 4bfb769249e129f731afd6ea9ddb4506 *R/tcnewdata.R

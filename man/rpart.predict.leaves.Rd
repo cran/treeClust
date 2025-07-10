@@ -43,5 +43,5 @@ If type = "where", numeric vector of row numbers describing leaves in the
 Sam Buttrey
 }
 \seealso{
-\code{\link{rpart}}
+\code{\link[rpart]{rpart}}
 }

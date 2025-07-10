@@ -1,4 +1,4 @@
-846f13da60c1541cd96677d1d7d22ce0 *DESCRIPTION
+68c686bd9e8cede00be15fdf1ed15f3a *DESCRIPTION
 8d8ae6c06196746d9c64638e7976e8a1 *NAMESPACE
 4b1011dfe01ddd167c1dace7402748f8 *R/cramer.R
 1ce526dfac864d6326bb1edaf37de17d *R/d3.dist.R
@@ -22,11 +22,11 @@ d954787fc7afcb5cc6a4c5900c5757c7 *man/leaf.numbers.Rd
 822c095526ce06ada25e2d84f7db5c17 *man/plot.treeClust.Rd
 aec021d607d0a4ef9cfe63cc331f0fcd *man/print.treeClust.Rd
 44116aa9a85bd4bcb101c28ef9edaad0 *man/rp.deviance.Rd
-4246e14af716422c0adc90a3417a297f *man/rpart.predict.leaves.Rd
+7c50f440c97d0d75557b851b4b269dfe *man/rpart.predict.leaves.Rd
 15a5f584c70207745609e91772d6dadb *man/summary.treeClust.Rd
 105553cd062ef20279678ef25e63c612 *man/tcdist.Rd
 a6f380ad30d010dc77476acfb1ef2fb3 *man/tcnewdata.Rd
-a7bd60013eebd81f2d9924500d705544 *man/treeClust.Rd
+d0707d473eacf7a6ecd5bc883b360df5 *man/treeClust.Rd
 ad390df4c06316df517ba8a277b1d56f *man/treeClust.control.Rd
-d7461b8e14110317a347503ebb0768f4 *man/treeClust.dist.Rd
+7bab7d2e6e6dedd90371c06eee74832b *man/treeClust.dist.Rd
 32565c4ab0ea69a2f6df6ec8f5dbed45 *man/treeClust.rpart.Rd

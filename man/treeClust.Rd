@@ -47,7 +47,7 @@ List of the sort produced by \code{\link{treeClust.control}}, giving
  specifications for the fitting routine.
 }
   \item{rcontrol}{
-List of the sort produced by \code{\link{rpart.control}}, giving
+List of the sort produced by \code{\link[rpart]{rpart.control}}, giving
  arguments for the rpart routine.
 }
   \item{\dots}{

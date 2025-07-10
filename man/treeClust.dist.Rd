@@ -6,7 +6,7 @@ Built treeClust distance
 }
 \description{
 This function uses treeClust to build a distance. It is intended to act analagously
-to \code{\link{daisy}} and \code{\link{dist}}.
+to \code{\link[cluster]{daisy}} and \code{\link{dist}}.
 }
 \usage{
 treeClust.dist(x, ...)
